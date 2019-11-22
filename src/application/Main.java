@@ -27,7 +27,7 @@ public class Main extends Application {
 		try {
 			VBox root = new VBox();
 			FileChooser fc = new FileChooser();
-			fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files","*.mp3",".wav"));
+			fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files","*.mp3","*.wav"));
 			MediaView mediaView = new MediaView();;
 			mediaView.setMediaPlayer(mediaPlayer);
 
