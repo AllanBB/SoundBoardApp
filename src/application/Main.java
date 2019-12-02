@@ -1,16 +1,15 @@
 package application;
 
-import java.io.File;
-
+import application.Views.MainView;
 import javafx.application.Application;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 
 /**
  * Proof of concept
@@ -19,12 +18,37 @@ import javafx.scene.media.MediaView;
  */
 
 public class Main extends Application {
-	Media media= null;
-	MediaPlayer mediaPlayer;
+	public static Media media= null;
+	public static MediaPlayer mediaPlayer;
+	public static int buttonRadius = 20;
+	public static Model mod = new Model(buttonRadius);
+	public static final MainView m = new MainView();
+	public static IModel imodel = new IModel();
+	public static Controller control = new Controller();
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			BorderPane root = new BorderPane();
+			//Create menubar
+			
+			MenuBar menu = new MenuBar();
+			
+			Menu help = new Menu("Help");
+			
+			MenuItem about = new MenuItem("About");
+			MenuItem helpInfo = new MenuItem("Help");
+			
+			help.getItems().addAll(about, helpInfo);
+			menu.getMenus().add(help);
+			
+			root.setTop(menu);
+			
+			root.setCenter(m);
+			
+			/*
+			
 			VBox root = new VBox();
 			FileChooser fc = new FileChooser();
 			fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files","*.mp3","*.wav"));
@@ -63,9 +87,11 @@ public class Main extends Application {
 			});
 
 			root.getChildren().addAll(fetch,play,stop);
+			*/
 
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
+			primaryStage.sizeToScene();
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

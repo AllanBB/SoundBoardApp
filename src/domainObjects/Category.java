@@ -34,8 +34,8 @@ public class Category {
 	 * Add a sound to the category
 	 * @param sound The sound to add
 	 */
-	public void addSound(Sound sound) {
-		sounds.add(sound);
+	public void addSound(Sound x) {
+		sounds.add(x);
 	}
 	
 	/**
@@ -55,6 +55,10 @@ public class Category {
 		this.name = name;
 		sounds = new SimpleListProperty<Sound>();
 	}
-	
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}	
 	
 }

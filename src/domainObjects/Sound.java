@@ -1,11 +1,5 @@
 package domainObjects;
 
-import java.io.File;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-
 /**
  * A class representing a sound
  */
@@ -19,15 +13,15 @@ public class Sound {
 	/**
 	 * The system path to the sound
 	 */
-	String path;
+	String path = "/home1/ugrads/bsavard1/Downloads/cat.mp3";
 
 	/**
 	 * The description of the file
 	 */
 	String description;
 
-	 Media media = new Media(new File(path).toURI().toString());
-	 MediaPlayer mediaPlayer = new MediaPlayer(media);
+//	 Media media = new Media(new File(path).toURI().toString());
+//	 MediaPlayer mediaPlayer = new MediaPlayer(media);
 
 	public Sound(String name, String description) {
 		this.name = name;
@@ -50,21 +44,21 @@ public class Sound {
 		this.name = name;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
-		media = new Media(new File(path).toURI().toString());
-		mediaPlayer = new MediaPlayer(media);
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void play() {
-
-		MediaView mediaView = new MediaView();
-		mediaView.setMediaPlayer(mediaPlayer);
-		mediaPlayer.play();
-	}
+//	public void setPath(String path) {
+//		this.path = path;
+//		media = new Media(new File(path).toURI().toString());
+//		mediaPlayer = new MediaPlayer(media);
+//	}
+//
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//
+//	public void play() {
+//
+//		MediaView mediaView = new MediaView();
+//		mediaView.setMediaPlayer(mediaPlayer);
+//		mediaPlayer.play();
+//	}
 
 }
