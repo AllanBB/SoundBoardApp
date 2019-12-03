@@ -1,5 +1,12 @@
 package domainObjects;
 
+import java.io.File;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.util.Duration;
+
 /**
  * A class representing a sound
  */
@@ -13,19 +20,21 @@ public class Sound {
 	/**
 	 * The system path to the sound
 	 */
-	String path = "/home1/ugrads/bsavard1/Downloads/cat.mp3";
+	String path = "src/SampleSounds/birds2.wav";
 
 	/**
 	 * The description of the file
 	 */
 	String description;
 
-//	 Media media = new Media(new File(path).toURI().toString());
-//	 MediaPlayer mediaPlayer = new MediaPlayer(media);
+	 Media media = new Media(new File(path).toURI().toString());
+	 MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-	public Sound(String name, String description) {
+	public Sound(String name, String path) {
 		this.name = name;
-		this.description = description;
+		this.path = path;
+		media = new Media(new File(path).toURI().toString());
+		mediaPlayer = new MediaPlayer(media);
 	}
 
 	public String getName() {
@@ -44,21 +53,22 @@ public class Sound {
 		this.name = name;
 	}
 
-//	public void setPath(String path) {
-//		this.path = path;
-//		media = new Media(new File(path).toURI().toString());
-//		mediaPlayer = new MediaPlayer(media);
-//	}
-//
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
-//
-//	public void play() {
-//
-//		MediaView mediaView = new MediaView();
-//		mediaView.setMediaPlayer(mediaPlayer);
-//		mediaPlayer.play();
-//	}
+	public void setPath(String path) {
+		this.path = path;
+		media = new Media(new File(path).toURI().toString());
+		mediaPlayer = new MediaPlayer(media);
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void play() {
+
+		MediaView mediaView = new MediaView();
+		mediaView.setMediaPlayer(mediaPlayer);
+		mediaPlayer.seek(new Duration(0.0));
+		mediaPlayer.play();
+	}
 
 }

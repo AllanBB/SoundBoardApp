@@ -22,9 +22,10 @@ public class Model {
 
 		
 		Category cat1 = new Category("Animals");
-		Sound x = new Sound("Cat", "Meow");
+		Sound x = new Sound("Bird", "src/SampleSounds/birds2.wav");
 		categories.add(cat1);
-		//categories.get(0).addSound(x);
+		cat1.addSound(x);
+		cat1.addSound(new Sound("Raven","src/SampleSounds/raven2.wav"));
 		
 		this.buttonRadius = buttonRadius;
 	}
