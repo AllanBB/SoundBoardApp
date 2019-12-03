@@ -88,8 +88,12 @@ public class Sound {
 				mediaView.setMediaPlayer(mediaPlayer);
 				mediaPlayer.seek(new Duration(0.0));
 				mediaPlayer.play();
+				mediaPlayer.setOnEndOfMedia(()->{
+					mediaPlayer.stop();
+				});
 			}
 		}
+	
 	}
 
 	public SimpleStringProperty getNameProperty() {
