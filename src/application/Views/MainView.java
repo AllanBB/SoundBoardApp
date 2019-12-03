@@ -2,6 +2,7 @@ package application.Views;
 
 import application.Main;
 import domainObjects.Category;
+import domainObjects.Sound;
 import javafx.collections.ListChangeListener;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -19,7 +20,7 @@ import javafx.util.StringConverter;
  * The main view which will contain the list of category and sfx buttons
  */
 public class MainView extends BorderPane {
-	public Button s0, s1, s2, s3, playPause, createCat;
+	public Button s0, s1, s2, s3, playPause, createCat,edit;
 	public ListView<Category> catList;
 
 	public MainView() {
@@ -63,11 +64,12 @@ public class MainView extends BorderPane {
 		});
 		catList.setItems(Main.mod.getCategories());
 		this.setLeft(catList);
+		catList.getSelectionModel().select(0);
 
 		// Hbox for edit/create/mix buttons
 		HBox hb1 = new HBox();
 
-		Button edit = new Button("Edit");
+		edit = new Button("Edit");
 		Button mix = new Button("Mix");
 		createCat = new Button("Create Category");
 		Slider slider = new Slider();
@@ -92,24 +94,41 @@ public class MainView extends BorderPane {
 		// BorderPane.setAlignment(hb1, Pos.TOP_RIGHT);
 
 		// Create Sound Buttons
+		VBox buttonVBox = new VBox();
 		HBox hb3 = new HBox();
+		HBox hb4 = new HBox();
+		s0 = new Button(Main.mod.getCategories().get(0).getSound().get(0).getName());
+		s1 = new Button(Main.mod.getCategories().get(0).getSound().get(1).getName());
+		s2 = new Button(Main.mod.getCategories().get(0).getSound().get(2).getName());
+		s3 = new Button(Main.mod.getCategories().get(0).getSound().get(3).getName());
 
-		s0 = new Button("s0");
-		s1 = new Button("s1");
-		s2 = new Button("s2");
-		s3 = new Button("s3");
-
+		buttonVBox.setSpacing(30.0);
 		hb3.setSpacing(30.0);
+		hb4.setSpacing(30.0);
 
-		hb3.getChildren().addAll(s0, s1, s2, s3);
+		hb3.getChildren().addAll(s0, s1);
+		hb4.getChildren().addAll(s2, s3);
+		buttonVBox.getChildren().addAll(hb3,hb4);
 		// BorderPane.setAlignment(hb2, Pos.BOTTOM_RIGHT);
 
 		// Outer VBox
 
 		VBox vb = new VBox(8);
 		Separator sep = new Separator();
-		vb.getChildren().addAll(hb1, hb2, sep, hb3);
+		vb.getChildren().addAll(hb1, hb2, sep, buttonVBox);
 		this.setRight(vb);
+		
+		Main.imodel.buttonSounds.addListener(new ListChangeListener<Sound>() {
+			
+			@Override
+			public void onChanged(Change<? extends Sound> c) {
+				s0.setText(Main.imodel.buttonSounds.get(0).getName());
+				s1.setText(Main.imodel.buttonSounds.get(1).getName());
+				s2.setText(Main.imodel.buttonSounds.get(2).getName());
+				s3.setText(Main.imodel.buttonSounds.get(3).getName());
+			}
+			
+		});
 
 	}
 

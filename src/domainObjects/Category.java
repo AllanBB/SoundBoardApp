@@ -38,7 +38,8 @@ public class Category {
 	 * @param sound The sound to add
 	 */
 	public void addSound(Sound x) {
-		sounds.add(x);
+		sounds.add(0, x);
+		sounds.remove(sounds.size()-1);
 	}
 	
 	/**
@@ -59,10 +60,13 @@ public class Category {
 		ArrayList<Sound> list = new ArrayList<Sound>();
 		ObservableList<Sound> observableList = FXCollections.observableArrayList(list);
 		sounds = new SimpleListProperty<Sound>(observableList);
+		sounds.add(new Sound("empty"));
+		sounds.add(new Sound("empty"));
+		sounds.add(new Sound("empty"));
+		sounds.add(new Sound("empty"));
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
