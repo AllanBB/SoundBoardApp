@@ -4,7 +4,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import application.Main;
 import domainObjects.Sound;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -13,23 +15,40 @@ import javafx.scene.control.Label;
  */
 public class SoundEdit extends Pane {
 
-	Sound sound;
-	TextField name,description;
-	Label path;	
-	Button save,delete,openSoundPicker;
+//	Sound sound;
+	public TextField name;
+	public Label path;	
+	public Button save,cancel,openSoundPicker;
 	
 	public SoundEdit() {
-		createViewLayout();
+		name = new TextField();
+		path =new Label("Select a sound ->");
+		path.setPrefWidth(200);
+		path.setMaxWidth(200);
+		save =new Button("Save");
+		cancel =new Button("Cancel");
+		openSoundPicker =new Button("Pick");//TODO replace with icon
+		Main.imodel.selectedSound.addListener(new ListChangeListener<Sound>() {
+			
+			@Override
+			public void onChanged(Change<? extends Sound> c)  {
+				initiallizeElements();
+			}
+			
+		});
 		initiallizeElements();
+		createViewLayout();
+		
 	}
 
 	private void initiallizeElements() {
-		name = new TextField(sound.getName());
-		description= new TextField(sound.getDescription());
-		path =new Label(sound.getDescription());
-		save =new Button("Save");
-		delete =new Button("Delete");
-		openSoundPicker =new Button();//find a folder icon
+		if(Main.imodel.selectedSound.get(0).getPath()==null) {
+			path.setText("Select a sound ->");
+		}else {
+			path.setText(Main.imodel.selectedSound.get(0).getPath());
+		}
+		name.setText(Main.imodel.selectedSound.get(0).getName());
+		
 		
 	}
 
@@ -40,10 +59,11 @@ public class SoundEdit extends Pane {
 		VBox root= new VBox();
 		HBox pathBox= new HBox();
 		HBox saveDeleteBox = new HBox();
+		saveDeleteBox.setSpacing(5);
 		pathBox.getChildren().addAll(path,openSoundPicker);
-		saveDeleteBox.getChildren().addAll(save,delete);
-		root.getChildren().addAll(name,pathBox,description,saveDeleteBox);
-		this.getChildren().add(root);
+		saveDeleteBox.getChildren().addAll(save,cancel);
+		root.getChildren().addAll(name,pathBox,saveDeleteBox);
+		this.getChildren().addAll(root);
 	}
 	
 }

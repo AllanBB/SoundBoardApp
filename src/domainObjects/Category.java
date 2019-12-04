@@ -1,6 +1,9 @@
 package domainObjects;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -35,7 +38,8 @@ public class Category {
 	 * @param sound The sound to add
 	 */
 	public void addSound(Sound x) {
-		sounds.add(x);
+		sounds.add(0, x);
+		sounds.remove(sounds.size()-1);
 	}
 	
 	/**
@@ -53,12 +57,22 @@ public class Category {
 	public Category(String name) {
 		super();
 		this.name = name;
-		sounds = new SimpleListProperty<Sound>();
+		ArrayList<Sound> list = new ArrayList<Sound>();
+		ObservableList<Sound> observableList = FXCollections.observableArrayList(list);
+		sounds = new SimpleListProperty<Sound>(observableList);
+		sounds.add(new Sound("empty"));
+		sounds.add(new Sound("empty"));
+		sounds.add(new Sound("empty"));
+		sounds.add(new Sound("empty"));
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name=name;
+		
 	}	
 	
 }

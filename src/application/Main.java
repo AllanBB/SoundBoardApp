@@ -1,6 +1,7 @@
 package application;
 
 import application.Views.MainView;
+import application.Views.SoundEdit;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -22,15 +23,17 @@ public class Main extends Application {
 	public static MediaPlayer mediaPlayer;
 	public static int buttonRadius = 20;
 	public static Model mod = new Model(buttonRadius);
-	public static final MainView m = new MainView();
 	public static IModel imodel = new IModel();
+	public static final MainView m = new MainView();
 	public static Controller control = new Controller();
-
+	public static SoundEdit soundEdit = new SoundEdit();
+	public static SoundEditController soundEditController = new SoundEditController();
+	public static BorderPane root;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
-			BorderPane root = new BorderPane();
+			root = new BorderPane();
 			//Create menubar
 			
 			MenuBar menu = new MenuBar();
