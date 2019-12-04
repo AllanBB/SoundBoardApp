@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -27,23 +29,32 @@ public class Main extends Application {
 	public static final MainView m = new MainView();
 	public static Controller control = new Controller();
 	public static SoundEdit soundEdit = new SoundEdit();
-	public static SoundEditController soundEditController = new SoundEditController();
+	//public static SoundEditController soundEditController = new SoundEditController();
 	public static BorderPane root;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			root = new BorderPane();
-			//Create menubar
+			//Create MenuBar
 			
 			MenuBar menu = new MenuBar();
 			
 			Menu help = new Menu("Help");
+
+			//Creating a sub-menu to hold about and help information.
+			Menu subHelp = new Menu("Help");
+			MenuItem helpDets = new MenuItem("This information will help you use my app, you're welcome.");
+			subHelp.getItems().add(helpDets);
 			
-			MenuItem about = new MenuItem("About");
-			MenuItem helpInfo = new MenuItem("Help");
+			Menu subAbout = new Menu("About");
+			MenuItem logo = new MenuItem("Developers: \nPatrick Godin,\nBrianne Savard,\nAllan Beaton Boutilier");
+			Image l = new Image(getClass().getResourceAsStream("./logo.png"));
+			logo.setGraphic(new ImageView(l));
+			subAbout.getItems().addAll(logo);
 			
-			help.getItems().addAll(about, helpInfo);
+			
+			help.getItems().addAll(subHelp, subAbout);
 			menu.getMenus().add(help);
 			
 			root.setTop(menu);
@@ -51,7 +62,6 @@ public class Main extends Application {
 			root.setCenter(m);
 			
 			/*
-			
 			VBox root = new VBox();
 			FileChooser fc = new FileChooser();
 			fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files","*.mp3","*.wav"));
