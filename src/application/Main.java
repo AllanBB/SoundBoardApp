@@ -1,7 +1,15 @@
 package application;
 
+import application.Views.ClipEdit;
 import application.Views.MainView;
+import application.Views.MixEdit;
+import application.Views.PlaylistEdit;
 import application.Views.SoundEdit;
+import controllers.ClipEditController;
+import controllers.Controller;
+import controllers.MixEditController;
+import controllers.PlaylistEditController;
+import controllers.SoundEditController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -28,6 +36,12 @@ public class Main extends Application {
 	public static Controller control = new Controller();
 	public static SoundEdit soundEdit = new SoundEdit();
 	public static SoundEditController soundEditController = new SoundEditController();
+	public static PlaylistEdit playlistEdit = new PlaylistEdit();
+	public static PlaylistEditController playlistEdiController = new PlaylistEditController();
+	public static MixEdit mixEdit = new MixEdit();
+	public static MixEditController mixEditController = new MixEditController();
+	public static ClipEdit clipEdit = new ClipEdit();
+	public static ClipEditController clipEditController = new ClipEditController();
 	public static BorderPane root;
 	@Override
 	public void start(Stage primaryStage) {
@@ -93,7 +107,9 @@ public class Main extends Application {
 			*/
 
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Sound Board Project");
 			primaryStage.sizeToScene();
 			primaryStage.show();
 		} catch(Exception e) {
