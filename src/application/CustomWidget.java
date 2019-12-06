@@ -21,7 +21,7 @@ public class CustomWidget extends VBox {
 	public CustomWidget() {
 		this.prefWidth(400);
 		this.maxWidth(400);
-		name = new Label("");
+		name = new Label(Main.imodel.selectedSound.get(0).getName());
 		this.setAlignment(Pos.TOP_CENTER);
 		path1 = new HBox();
 		path2 = new HBox();
@@ -29,7 +29,8 @@ public class CustomWidget extends VBox {
 		path1.maxWidth(400);
 		this.toBack();
 		this.getChildren().addAll(new Separator(), name, path1, path2);
-
+		scrollingText(path1, Main.imodel.selectedSound.get(0).getPath());
+		scrollingText(path2, "");
 		Main.imodel.selectedSound.addListener(new ListChangeListener<Sound>() {
 			@Override
 			public void onChanged(Change<? extends Sound> c) {
