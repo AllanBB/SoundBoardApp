@@ -68,50 +68,11 @@ public class Main extends Application {
 			Menu edit = new Menu("Edit");
 			Menu help = new Menu("Help");
 			
-//			 save= new MenuItem("Save");
-//			save.setOnAction(e->{
-//				control.save();
-//			});
 			 exit = new MenuItem("Exit");
 			exit.setOnAction(e->{
 				primaryStage.close();
 			});
 			
-//			 editSoundMenuItem = new MenuItem("Edit Sound");
-////			editSoundMenuItem.setOnAction(e->{
-////				root.setCenter(soundEdit);
-////			});
-//			 editMixMenuItem = new MenuItem("Edit Mix");
-////			editMixMenuItem.setOnAction(e->{
-////				root.setCenter(mixEdit);
-////			});
-//			 editPlaylistMenuItem = new MenuItem("Edit Playlist");
-////			editPlaylistMenuItem.setOnAction(e->{
-////				root.setCenter(playlistEdit);
-////			});
-//			 editClipMenuItem = new MenuItem("Edit Clip");
-////			editClipMenuItem.setOnAction(e->{
-////				root.setCenter(clipEdit);
-////			});
-//			
-//			//Creating a sub-menu to hold about and help information.
-//			 subHelp = new MenuItem("Help");
-////			subHelp.setOnAction(e->{
-////				try {
-////					root.setCenter(FXMLLoader.<VBox>load(getClass().getResource("Help.fxml")));
-////				} catch (IOException e1) {
-////					e1.printStackTrace();
-////				}
-////			});
-//
-//			 subAbout = new MenuItem("About");
-////			subAbout.setOnAction(e->{
-////				try {
-////					root.setCenter(FXMLLoader.<VBox>load(getClass().getResource("About.fxml")));
-////				} catch (IOException e1) {
-////					e1.printStackTrace();
-////				}
-////			});
 			
 			file.getItems().addAll(save,exit);
 			edit.getItems().addAll(editSoundMenuItem,editMixMenuItem,editPlaylistMenuItem,editClipMenuItem);
