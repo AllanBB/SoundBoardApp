@@ -17,7 +17,7 @@ public class PlaylistEditController {
 				createNewPlaylist();
 			}
 			Main.root.setCenter(Main.m);
-
+			Main.control.save();
 		});
 		Main.playlistEdit.cancel.setOnAction(e -> {
 			Main.root.setCenter(Main.m);

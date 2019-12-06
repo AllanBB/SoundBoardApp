@@ -1,12 +1,18 @@
 package domainObjects;
 
+import java.io.Serializable;
+
 import javafx.util.Duration;
 
 /**
  * A mixture of 2 sound Allows for 2 sounds to be played at the same time.
  */
-public class Mix extends Sound {
+public class Mix extends Sound implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1979948314782879349L;
 	public static String style="-fx-background-color: #eb752d; ";
 	public Mix(String name) {
 		super(name);

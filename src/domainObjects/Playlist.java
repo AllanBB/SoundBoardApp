@@ -1,10 +1,16 @@
 package domainObjects;
 
+import java.io.Serializable;
+
 /**
  * A playlist of multiple sound Plays sound one after the other
  */
-public class Playlist extends Sound {
+public class Playlist extends Sound implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4557556140883454550L;
 	public static String style = "-fx-background-color: #78eb5e; ";
 	
 	public Playlist(String name) {

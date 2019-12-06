@@ -30,7 +30,7 @@ public class Main extends Application {
 	public static Media media= null;
 	public static MediaPlayer mediaPlayer;
 	public static int buttonRadius = 20;
-	public static Model mod = new Model(buttonRadius);
+	public static Model mod = new Model();
 	public static IModel imodel = new IModel();
 	public static final MainView m = new MainView();
 	public static Controller control = new Controller();
@@ -64,6 +64,8 @@ public class Main extends Application {
 			
 			root.setCenter(m);
 			
+			control.load();
+//			control.updateButtons();
 			/*
 			
 			VBox root = new VBox();

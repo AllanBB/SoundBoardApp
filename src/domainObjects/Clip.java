@@ -1,13 +1,18 @@
 package domainObjects;
 
 import java.io.File;
+import java.io.Serializable;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-public class Clip extends Sound {
+public class Clip extends Sound implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4372483073320118000L;
 	public static String style="-fx-background-color: #eb5ea7; ";
 	
 	public Clip(String name) {

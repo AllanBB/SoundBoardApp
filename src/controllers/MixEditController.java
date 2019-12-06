@@ -18,6 +18,7 @@ public class MixEditController {
 				createNewMix();
 			}
 			Main.root.setCenter(Main.m);
+			Main.control.save();
 
 		});
 		Main.mixEdit.cancel.setOnAction(e -> {

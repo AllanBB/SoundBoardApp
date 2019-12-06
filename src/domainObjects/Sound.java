@@ -1,6 +1,10 @@
 package domainObjects;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +16,12 @@ import javafx.util.Duration;
 /**
  * A class representing a sound
  */
-public class Sound {
+public class Sound implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6109640774359327224L;
 
 	/**
 	 * The name given to the Sound
@@ -24,12 +33,11 @@ public class Sound {
 	 */
 	SimpleStringProperty path;// = "src/SampleSounds/birds2.wav";
 
-	public SimpleDoubleProperty startTime,endTime;
 	
 	public static String style="-fx-background-color: yellow;";
 
-	Media media;// = new Media(new File(path.getValue()).toURI().toString());
-	MediaPlayer mediaPlayer;// = new MediaPlayer(media);
+	 Media media;// = new Media(new File(path.getValue()).toURI().toString());
+	 MediaPlayer mediaPlayer;// = new MediaPlayer(media);
 
 	public Sound(String name) {
 		this.name = new SimpleStringProperty();
@@ -40,8 +48,6 @@ public class Sound {
 	public Sound(String name, String path) {
 		this.name = new SimpleStringProperty();
 		this.path = new SimpleStringProperty();
-		this.startTime = new SimpleDoubleProperty(0.0);
-		this.endTime = new SimpleDoubleProperty(0.0);
 		this.name.setValue(name);
 		this.path.setValue(path);
 		media = new Media(new File(path).toURI().toString());
@@ -105,6 +111,10 @@ public class Sound {
 	public SimpleStringProperty getPathProperty() {
 		return path;
 	}
+	
+	
+	
+	
 
 	/**
 	 * ABSTRACT METHOD, classes extending this one need this method signature. An
