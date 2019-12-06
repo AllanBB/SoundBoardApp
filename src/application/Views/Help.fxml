@@ -10,18 +10,18 @@
 
 <VBox spacing="5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HelpController">
 	<!-- TODO Add Nodes -->
-	<Label text="Sound Board App" />
+	<Label text="Sound Board App" style="-fx-font-weight: bold"/>
 
 	<Text >Play your favorite SFX. Just pick a category and play a sound.
-	If the sound or category you want</Text><Text>  is not there,
+	If the sound or category </Text><Text>you want  is not there,
 	just add it by selecting a button and clicking the edit
-	button corresponding</Text><Text> to the type of sound you want</Text>
+	button </Text><Text> correspondingto the type of sound you want</Text>
 
 	<VBox spacing="5">
 		<Label text="Sound:" style="-fx-font-weight: bold"/>
 		<Label>
 			A sound is your regular sound effect.Pick a file and give it a
-			name.
+			name.</Label><Label> 
 			Selected it and play it simple
 		</Label>
 		<Separator />

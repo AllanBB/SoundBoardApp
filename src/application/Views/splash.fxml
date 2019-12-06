@@ -9,7 +9,7 @@
 
 
 
-<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="508.0" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="370.0" fitWidth="508.0" pickOnBounds="true">
          <image>

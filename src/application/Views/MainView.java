@@ -137,7 +137,7 @@ public class MainView extends BorderPane {
 		VBox vb = new VBox(8);
 		Separator sep = new Separator();
 		vb.getChildren().addAll(hb1, hb2, sep, buttonVBox);
-		this.setRight(vb);
+		this.setCenter(vb);
 		this.setBottom(new CustomWidget());
 		Main.imodel.buttonSounds.addListener(new ListChangeListener<Sound>() {
 			
