@@ -11,11 +11,7 @@ public class PlaylistEditController {
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files", "*.mp3", "*.wav"));
 		Main.playlistEdit.save.setOnAction(e -> {
-			if (Main.imodel.selectedSound.get(0).getClass().equals(Playlist.class)) {
-				updateExistingPlaylist();
-			} else {
 				createNewPlaylist();
-			}
 			Main.root.setCenter(Main.m);
 			Main.control.save();
 		});
@@ -56,15 +52,15 @@ public class PlaylistEditController {
 		Main.control.updateButtons();
 	}
 
-	/**
-	 * 
-	 */
-	private void updateExistingPlaylist() {
-		if (!Main.playlistEdit.path1.getText().equals("Select a sound ->")) {
-			Main.imodel.selectedSound.get(0).setNameAndPath(Main.playlistEdit.name.getText(),
-					Main.playlistEdit.path1.getText(), Main.playlistEdit.path2.getText());
-		}
-	}
+//	/**
+//	 * 
+//	 */
+//	private void updateExistingPlaylist() {
+//		if (!Main.playlistEdit.path1.getText().equals("Select a sound ->")) {
+//			Main.imodel.selectedSound.get(0).setNameAndPath(Main.playlistEdit.name.getText(),
+//					Main.playlistEdit.path1.getText(), Main.playlistEdit.path2.getText());
+//		}
+//	}
 
 	
 

@@ -40,6 +40,13 @@ public class Playlist extends Sound implements Serializable {
 	@Override
 	public void setNameAndPath(String name, String path1, String path2) {
 		this.name.set(name);
+		//force trigger of path change. Ugly but time is running out
+		if(this.getPath().equals("soundFile/raven2.wav")) {
+			this.setPath("soundFile/horse.wav");
+		}else {
+		this.setPath("soundFile/raven2.wav");
+		}
+		
 		this.sound1.setPath(path1);
 		this.sound2.setPath(path2);
 		
