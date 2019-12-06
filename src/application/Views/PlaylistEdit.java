@@ -8,10 +8,8 @@ import application.Main;
 import domainObjects.Playlist;
 import domainObjects.Sound;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 
 /**
  * The editable view of a Playlist Plays sound one after the other

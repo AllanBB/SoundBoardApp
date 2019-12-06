@@ -16,7 +16,7 @@
             <Image url="@logo.png" />
          </image>
       </ImageView>
-      <Pane opacity="0.45" prefHeight="352.0" prefWidth="522.0" style="-fx-background-color: #000000;" />
+      <Pane opacity="0" prefHeight="352.0" prefWidth="522.0" style="-fx-background-color: #000000;" />
       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="">
       </Text>
    </children>

@@ -19,7 +19,7 @@
 		button corresponding to the type of sound you want</Text>
 
 	<VBox spacing="5">
-		<ImageView fx:id="imageView" layoutX="29.0" layoutY="44.0"
+		<ImageView layoutX="29.0" layoutY="44.0"
 			fitHeight="112.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@/application/Views/logo.png" />

@@ -9,12 +9,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import application.Main;
-import application.Model;
 import domainObjects.Category;
 import domainObjects.Sound;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
@@ -204,6 +202,7 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void load() {
 		try {
 			FileInputStream fileInputStream = new FileInputStream("src/model.txt");

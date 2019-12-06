@@ -3,7 +3,6 @@ package controllers;
 import java.io.File;
 
 import application.Main;
-import domainObjects.Playlist;
 import domainObjects.Sound;
 import javafx.stage.FileChooser;
 

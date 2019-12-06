@@ -43,11 +43,6 @@ public class Model implements Serializable {
 	}
 	
 	public ObservableList<Category> getCategories(){
-//		ArrayList<String> list = new ArrayList<String>();
-//		for(Category cat:categories) {
-//			list.add(cat.getName());
-//		}
-		
 		return categories.getValue();
 	}
 	
@@ -56,25 +51,6 @@ public class Model implements Serializable {
 		return list;
 	}
 	public void setCategoriesForSeriliazation(ArrayList<Category> arg) {
-//		Category cat=new Category("test");
-//		cat.getSound().setAll(arg);
-//		categories.clear();
 		categories.setAll(arg);
 	}
-	
-	
-	//TODO Add getters setters and all that stuff
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

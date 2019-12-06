@@ -23,6 +23,7 @@ public class Clip extends Sound implements Serializable {
 		super(name,path);
 	}
 
+	@Override
 	public void setNameAndPath(String name, String path, Duration duration, Duration duration2) {
 		media = new Media(new File(path).toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
@@ -32,22 +33,27 @@ public class Clip extends Sound implements Serializable {
 		this.path.setValue(path);
 	}
 	
+	@Override
 	public void setStartTime(Duration start) {
 		this.mediaPlayer.setStartTime(start);
 	}
 	
+	@Override
 	public void setStopTime(Duration end) {
 		this.mediaPlayer.setStopTime(end);
 	}
 	
+	@Override
 	public Duration getStartTime() {
 		return this.mediaPlayer.getStartTime();
 	}
 	
+	@Override
 	public Duration getStopTime() {
 		return this.mediaPlayer.getStopTime();
 	}
 	
+	@Override
 	public  String getStyle() {
 		return style;
 	}

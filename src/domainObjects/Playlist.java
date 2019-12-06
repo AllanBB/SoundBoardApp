@@ -23,6 +23,7 @@ public class Playlist extends Sound implements Serializable {
 	}
 
 
+	@Override
 	public void play() {
 
 		sound1.play();
@@ -32,9 +33,11 @@ public class Playlist extends Sound implements Serializable {
 
 	}
 	
+	@Override
 	public  String getStyle() {
 		return style;
 	}
+	@Override
 	public void setNameAndPath(String name, String path1, String path2) {
 		this.name.set(name);
 		this.sound1.setPath(path1);

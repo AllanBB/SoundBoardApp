@@ -2,13 +2,10 @@ package application.Views;
 
 import application.Main;
 import domainObjects.Clip;
-import domainObjects.Mix;
 import domainObjects.Sound;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;

@@ -118,6 +118,7 @@ public class Category implements Serializable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ArrayList<Sound> list = new ArrayList<Sound>();
 		ObservableList<Sound> observableList = FXCollections.observableArrayList(list);

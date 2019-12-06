@@ -22,11 +22,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -87,7 +84,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Sound Board Project");
-			Image l = new Image(getClass().getResourceAsStream("./logo.png"));
+			Image l = new Image(getClass().getResourceAsStream("/application/Views/logo.png"));
 			primaryStage.getIcons().add(l);
 			primaryStage.sizeToScene();
 			primaryStage.show();
