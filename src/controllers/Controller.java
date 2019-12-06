@@ -207,7 +207,6 @@ public class Controller {
 	public void load() {
 		try {
 			File file=new File(System.getProperty("user.home") + "/SoundBoard/model.txt");
-			System.out.println(System.getProperty("user.home"));
 			if(!file.getParentFile().exists())file.getParentFile().mkdir();
 			file.createNewFile();
 			FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.home") + "/SoundBoard/model.txt");
