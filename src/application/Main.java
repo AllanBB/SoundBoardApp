@@ -1,14 +1,22 @@
 package application;
 
+import java.io.IOException;
+import javafx.util.Duration;
+
 import application.Views.MainView;
 import application.Views.SoundEdit;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -27,70 +35,37 @@ public class Main extends Application {
 	public static final MainView m = new MainView();
 	public static Controller control = new Controller();
 	public static SoundEdit soundEdit = new SoundEdit();
-	public static SoundEditController soundEditController = new SoundEditController();
+	//public static SoundEditController soundEditController = new SoundEditController();
 	public static BorderPane root;
+	public static StackPane pane;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			root = new BorderPane();
-			//Create menubar
+			//Create MenuBar
 			
 			MenuBar menu = new MenuBar();
 			
 			Menu help = new Menu("Help");
+
+			//Creating a sub-menu to hold about and help information.
+			Menu subHelp = new Menu("Help");
+			MenuItem helpDets = new MenuItem("This information will help you use my app, you're welcome.");
+			subHelp.getItems().add(helpDets);
 			
-			MenuItem about = new MenuItem("About");
-			MenuItem helpInfo = new MenuItem("Help");
+			Menu subAbout = new Menu("About");
+			MenuItem logo = new MenuItem("Developers: \nPatrick Godin,\nBrianne Savard,\nAllan Beaton Boutilier");
+			Image l = new Image(getClass().getResourceAsStream("./logo.png"));
+			logo.setGraphic(new ImageView(l));
+			subAbout.getItems().addAll(logo);
 			
-			help.getItems().addAll(about, helpInfo);
-			menu.getMenus().add(help);
+			help.getItems().addAll(subHelp, subAbout);
+			menu.getMenus().add(help); 
 			
+			displaySplash();
 			root.setTop(menu);
-			
 			root.setCenter(m);
-			
-			/*
-			
-			VBox root = new VBox();
-			FileChooser fc = new FileChooser();
-			fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files","*.mp3","*.wav"));
-			MediaView mediaView = new MediaView();;
-			mediaView.setMediaPlayer(mediaPlayer);
-
-			Button fetch = new Button("Pick a sound file");
-			Button play = new Button("Play");
-			Button stop = new Button("Stop");
-
-			fetch.setOnMouseClicked(e->{
-				File file = fc.showOpenDialog(null);
-
-				//We could skip this step and use "file" directly ie "media = new Media(file.toURI().toString());
-				//However, this goes to show how we can get and use the path of the sound file
-				//Since path is just a string it would be easy to store in a database or something else
-				String path = file.getAbsolutePath();
-				path = path.replace("\\", "/");
-
-				media = new Media(new File(path).toURI().toString());
-				mediaPlayer = new MediaPlayer(media);
-				mediaView.setMediaPlayer(mediaPlayer);
-				play.disableProperty().set(false);
-				stop.disableProperty().set(false);
-			});
-
-			play.disableProperty().set(true);
-			play.setOnMouseClicked(e->{
-				mediaPlayer.play();
-			});
-
-			stop.disableProperty().set(true);
-			stop.setOnMouseClicked(e->{
-				mediaPlayer.stop();
-				mediaPlayer.seek(mediaPlayer.getStartTime());
-			});
-
-			root.getChildren().addAll(fetch,play,stop);
-			*/
 
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
@@ -98,6 +73,44 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void displaySplash() {
+		try {
+			//Load Splash view
+			pane = FXMLLoader.load(getClass().getResource("splash.fxml"));
+			
+			//Add to the root container
+			//root.getChildren().add(pane);
+			
+			//Load splash screen with face in effect
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3),pane);
+			fadeIn.setFromValue(0);
+			fadeIn.setToValue(1);
+			fadeIn.setCycleCount(1);
+			
+			//End splash animation
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3),pane);
+			fadeOut.setFromValue(1);
+			fadeOut.setToValue(0);
+			fadeOut.setCycleCount(1);
+			
+			fadeIn.play();
+			root.setCenter(pane);
+			
+			//After fade begins
+			
+			fadeIn.setOnFinished((e) -> {
+				fadeOut.play();
+			});
+			
+			//After fade out
+			fadeOut.setOnFinished((e) -> {
+				root.setCenter(m);
+			});
+		}catch(IOException ex){
+			
 		}
 	}
 
