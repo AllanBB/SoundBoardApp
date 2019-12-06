@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,8 +39,8 @@ public class Controller {
 		Main.m.catList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Category>() {
 			@Override
 			public void changed(ObservableValue<? extends Category> ov, Category oldVal, Category newVal) {
-				Category temp=newVal;
-				ObservableList<Sound> temp2=Main.imodel.buttonSounds;
+				Category temp = newVal;
+				ObservableList<Sound> temp2 = Main.imodel.buttonSounds;
 				Main.imodel.buttonSounds.set(0, newVal.getSound().get(0));
 				Main.imodel.buttonSounds.set(1, newVal.getSound().get(1));
 				Main.imodel.buttonSounds.set(2, newVal.getSound().get(2));
@@ -143,7 +144,7 @@ public class Controller {
 			FileOutputStream fileOutputStream = new FileOutputStream("src/model.txt");
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 			objectOutputStream.writeObject(Main.mod.getCategoriesForSeriliazation());
-			for(Category cat:Main.mod.getCategories()) {
+			for (Category cat : Main.mod.getCategories()) {
 				objectOutputStream.writeObject(cat);
 			}
 			objectOutputStream.flush();
@@ -157,18 +158,22 @@ public class Controller {
 		try {
 			FileInputStream fileInputStream = new FileInputStream("src/model.txt");
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-			ArrayList<Category> list= new ArrayList<Category>();
-//			while(objectInputStream.available()>0) {
-//				list.add((Category) objectInputStream.readObject());
-//			}
-			list=(ArrayList<Category>) objectInputStream.readObject();
-			for(Category cat:list) {
-				if(cat.getSound().size()<4) {
+			ArrayList<Category> list = new ArrayList<Category>();
+			// while(objectInputStream.available()>0) {
+			// list.add((Category) objectInputStream.readObject());
+			// }
+			list = (ArrayList<Category>) objectInputStream.readObject();
+			for (Category cat : list) {
+				if (cat.getSound().size() < 4) {
 					cat.getSound().add(new Sound("empty"));
 				}
 			}
-			Main.mod.setCategoriesForSeriliazation(list);
+			if (list != null && list.size() > 0)
+				Main.mod.setCategoriesForSeriliazation(list);
 			objectInputStream.close();
+		} catch (EOFException e) {
+			// end of file reach unexpectedly, this will happen the first time the app is
+			// booted and model.text is empty
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

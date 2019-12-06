@@ -25,20 +25,22 @@ public class PlaylistEditController {
 		Main.playlistEdit.openSoundPicker1.setOnAction(e -> {
 
 			File file = fc.showOpenDialog(null);
+			if(file!=null) {
 
 			String path = file.getAbsolutePath();
 			path = path.replace("\\", "/");
 			Main.playlistEdit.path1.setText(path);
+			}
 
 		});
 		Main.playlistEdit.openSoundPicker2.setOnAction(e -> {
 
 			File file = fc.showOpenDialog(null);
-
-			String path = file.getAbsolutePath();
-			path = path.replace("\\", "/");
-			Main.playlistEdit.path2.setText(path);
-
+			if(file!=null) {
+				String path = file.getAbsolutePath();
+				path = path.replace("\\", "/");
+				Main.playlistEdit.path2.setText(path);
+			}
 		});
 	}
 

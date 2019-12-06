@@ -27,20 +27,20 @@ public class MixEditController {
 		Main.mixEdit.openSoundPicker1.setOnAction(e -> {
 
 			File file = fc.showOpenDialog(null);
-
-			String path = file.getAbsolutePath();
-			path = path.replace("\\", "/");
-			Main.mixEdit.path1.setText(path);
-
+			if (file != null) {
+				String path = file.getAbsolutePath();
+				path = path.replace("\\", "/");
+				Main.mixEdit.path1.setText(path);
+			}
 		});
 		Main.mixEdit.openSoundPicker2.setOnAction(e -> {
 
 			File file = fc.showOpenDialog(null);
-
-			String path = file.getAbsolutePath();
-			path = path.replace("\\", "/");
-			Main.mixEdit.path2.setText(path);
-
+			if (file != null) {
+				String path = file.getAbsolutePath();
+				path = path.replace("\\", "/");
+				Main.mixEdit.path2.setText(path);
+			}
 		});
 	}
 
@@ -48,11 +48,9 @@ public class MixEditController {
 	 * 
 	 */
 	private void createNewMix() {
-		Mix newMix = new Mix(Main.mixEdit.name.getText(), Main.mixEdit.path1.getText(),
-				Main.mixEdit.path2.getText());
-		Main.m.catList.getSelectionModel().getSelectedItem().getSoundsProperty()
-				.set(Main.m.catList.getSelectionModel().getSelectedItem().getSoundsProperty()
-						.indexOf(Main.imodel.selectedSound.get(0)), newMix);
+		Mix newMix = new Mix(Main.mixEdit.name.getText(), Main.mixEdit.path1.getText(), Main.mixEdit.path2.getText());
+		Main.m.catList.getSelectionModel().getSelectedItem().getSoundsProperty().set(Main.m.catList.getSelectionModel()
+				.getSelectedItem().getSoundsProperty().indexOf(Main.imodel.selectedSound.get(0)), newMix);
 		Main.imodel.selectedSound.set(0, newMix);
 
 		Main.control.updateButtons();
@@ -63,8 +61,8 @@ public class MixEditController {
 	 */
 	private void updateExistingMix() {
 		if (!Main.mixEdit.path1.getText().equals("Select a sound ->")) {
-			Main.imodel.selectedSound.get(0).setNameAndPath(Main.mixEdit.name.getText(),
-					Main.mixEdit.path1.getText(), Main.mixEdit.path2.getText());
+			Main.imodel.selectedSound.get(0).setNameAndPath(Main.mixEdit.name.getText(), Main.mixEdit.path1.getText(),
+					Main.mixEdit.path2.getText());
 		}
 	}
 }

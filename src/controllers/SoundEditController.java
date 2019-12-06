@@ -30,7 +30,7 @@ public class SoundEditController {
 		Main.soundEdit.openSoundPicker.setOnAction(e -> {
 
 			File file = fc.showOpenDialog(null);
-
+			if(file!=null) {
 			String path = file.getAbsolutePath();
 			path = path.replace("\\", "/");
 			Main.soundEdit.path.setText(path);
@@ -38,6 +38,7 @@ public class SoundEditController {
 			if (Main.imodel.selectedSound.get(0).getName().equals("empty")) {
 				String temp = path.substring(path.lastIndexOf("/") + 1);
 				Main.soundEdit.name.setText(temp);
+			}
 			}
 		});
 	}

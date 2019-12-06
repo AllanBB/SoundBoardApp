@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?language javascript?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+
+<VBox spacing="5" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.AboutController">
+	<!-- TODO Add Nodes -->
+	<Label text="Sound Board App" style="-fx-font-weight: bold" />
+
+	<Text>Play your favorite SFX. Just pick a category and play a sound.
+		If the sound or category you want is not there,</Text>
+	<Text> just add it by selecting a button and clicking the edit
+		button corresponding to the type of sound you want</Text>
+
+	<VBox spacing="5">
+		<ImageView fx:id="imageView" layoutX="29.0" layoutY="44.0"
+			fitHeight="112.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@logo.png" />
+			</image>
+		</ImageView>
+	</VBox>
+	
+	<Label text="Developers: Patrick Godin,Brianne Savard,Allan Beaton Boutilier"/>
+	<Label>Sample Sounds: https://opengameart.org/content/rpg-sound-package</Label>
+	<Label text="Play Icon: https://www.flaticon.com/authors/freepik"/>
+	<Label text="Logo: Brianne Savard"/>
+
+	<Button fx:id="back" text="Back" />
+</VBox>
+

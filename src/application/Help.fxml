@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?language javascript?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.text.Text?>
+
+<VBox spacing="5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HelpController">
+	<!-- TODO Add Nodes -->
+	<Label text="Sound Board App" />
+
+	<Text >Play your favorite SFX. Just pick a category and play a sound.
+	If the sound or category you want is not there,</Text>
+	<Text> just add it by selecting a button and clicking the edit
+	button corresponding to the type of sound you want</Text>
+
+	<VBox spacing="5">
+		<Label text="Sound:" style="-fx-font-weight: bold"/>
+		<Label>
+			A sound is your regular sound effect.Pick a file and give it a
+			name.
+			Selected it and play it simple
+		</Label>
+		<Separator />
+		<Label text="Mix:" style="-fx-font-weight: bold"/>
+		<Label>
+			Mixes allow you to play two sounds at the same time.
+			Pick to
+			sound files, gave them a name and listen to your super combo
+		</Label>
+		<Separator />
+		<Label text="Playlist:" style="-fx-font-weight: bold"/>
+		<Label>
+			Playlist allow you to play two sounds one after the other.
+		</Label>
+		<Label>
+			Pick to sound files, gave them a name and listen to them in squence
+			saving yourself an extra click. What efficiency!
+		</Label>
+		<Separator />
+		<Label text="Clip:" style="-fx-font-weight: bold"/>
+		<Label>
+			Clips allow you to play a specific section of a sound
+		</Label>
+	</VBox>
+
+	<Button fx:id="back" text="Back" />
+</VBox>
+

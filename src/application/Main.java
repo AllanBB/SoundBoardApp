@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import application.Views.ClipEdit;
 import application.Views.MainView;
 import application.Views.MixEdit;
@@ -11,12 +13,16 @@ import controllers.MixEditController;
 import controllers.PlaylistEditController;
 import controllers.SoundEditController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -51,67 +57,72 @@ public class Main extends Application {
 			//Create menubar
 			
 			MenuBar menu = new MenuBar();
-			
+			Menu file = new Menu("File");
+			Menu edit = new Menu("Edit");
 			Menu help = new Menu("Help");
 			
-			MenuItem about = new MenuItem("About");
-			MenuItem helpInfo = new MenuItem("Help");
+			MenuItem save= new MenuItem("Save");
+			save.setOnAction(e->{
+				control.save();
+			});
+			MenuItem exit = new MenuItem("Exit");
+			exit.setOnAction(e->{
+				primaryStage.close();
+			});
 			
-			help.getItems().addAll(about, helpInfo);
-			menu.getMenus().add(help);
+			MenuItem editSoundMenuItem = new MenuItem("Edit Sound");
+			editSoundMenuItem.setOnAction(e->{
+				root.setCenter(soundEdit);
+			});
+			MenuItem editMixMenuItem = new MenuItem("Edit Mix");
+			editMixMenuItem.setOnAction(e->{
+				root.setCenter(mixEdit);
+			});
+			MenuItem editPlaylistMenuItem = new MenuItem("Edit Playlist");
+			editPlaylistMenuItem.setOnAction(e->{
+				root.setCenter(playlistEdit);
+			});
+			MenuItem editClipMenuItem = new MenuItem("Edit Clip");
+			editClipMenuItem.setOnAction(e->{
+				root.setCenter(clipEdit);
+			});
+			
+			//Creating a sub-menu to hold about and help information.
+			MenuItem subHelp = new MenuItem("Help");
+			subHelp.setOnAction(e->{
+				try {
+					root.setCenter(FXMLLoader.<VBox>load(getClass().getResource("Help.fxml")));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			});
+
+			MenuItem subAbout = new MenuItem("About");
+			Image l = new Image(getClass().getResourceAsStream("./logo.png"));
+			subAbout.setOnAction(e->{
+				try {
+					root.setCenter(FXMLLoader.<VBox>load(getClass().getResource("About.fxml")));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			});
+			
+			file.getItems().addAll(save,exit);
+			edit.getItems().addAll(editSoundMenuItem,editMixMenuItem,editPlaylistMenuItem,editClipMenuItem);
+			help.getItems().addAll(subHelp, subAbout);
+			menu.getMenus().addAll(file,edit,help);
 			
 			root.setTop(menu);
 			
 			root.setCenter(m);
 			
 			control.load();
-//			control.updateButtons();
-			/*
-			
-			VBox root = new VBox();
-			FileChooser fc = new FileChooser();
-			fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files","*.mp3","*.wav"));
-			MediaView mediaView = new MediaView();;
-			mediaView.setMediaPlayer(mediaPlayer);
-
-			Button fetch = new Button("Pick a sound file");
-			Button play = new Button("Play");
-			Button stop = new Button("Stop");
-
-			fetch.setOnMouseClicked(e->{
-				File file = fc.showOpenDialog(null);
-
-				//We could skip this step and use "file" directly ie "media = new Media(file.toURI().toString());
-				//However, this goes to show how we can get and use the path of the sound file
-				//Since path is just a string it would be easy to store in a database or something else
-				String path = file.getAbsolutePath();
-				path = path.replace("\\", "/");
-
-				media = new Media(new File(path).toURI().toString());
-				mediaPlayer = new MediaPlayer(media);
-				mediaView.setMediaPlayer(mediaPlayer);
-				play.disableProperty().set(false);
-				stop.disableProperty().set(false);
-			});
-
-			play.disableProperty().set(true);
-			play.setOnMouseClicked(e->{
-				mediaPlayer.play();
-			});
-
-			stop.disableProperty().set(true);
-			stop.setOnMouseClicked(e->{
-				mediaPlayer.stop();
-				mediaPlayer.seek(mediaPlayer.getStartTime());
-			});
-
-			root.getChildren().addAll(fetch,play,stop);
-			*/
 
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Sound Board Project");
+			primaryStage.getIcons().add(l);
 			primaryStage.sizeToScene();
 			primaryStage.show();
 		} catch(Exception e) {

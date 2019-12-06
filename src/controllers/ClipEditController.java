@@ -28,14 +28,15 @@ public class ClipEditController {
 		Main.clipEdit.openSoundPicker.setOnAction(e -> {
 
 			File file = fc.showOpenDialog(null);
+			if (file != null) {
+				String path = file.getAbsolutePath();
+				path = path.replace("\\", "/");
+				Main.clipEdit.path.setText(path);
 
-			String path = file.getAbsolutePath();
-			path = path.replace("\\", "/");
-			Main.clipEdit.path.setText(path);
-
-			if (Main.imodel.selectedSound.get(0).getName().equals("empty")) {
-				String temp = path.substring(path.lastIndexOf("/") + 1);
-				Main.clipEdit.name.setText(temp);
+				if (Main.imodel.selectedSound.get(0).getName().equals("empty")) {
+					String temp = path.substring(path.lastIndexOf("/") + 1);
+					Main.clipEdit.name.setText(temp);
+				}
 			}
 		});
 	}
@@ -45,19 +46,19 @@ public class ClipEditController {
 	 */
 	private void updateExistingClip() {
 		if (!Main.clipEdit.path.getText().equals("Select a sound ->")) {
-			Main.imodel.selectedSound.get(0).setNameAndPath(Main.clipEdit.name.getText(),
-					Main.clipEdit.path.getText(),Duration.seconds(Double.parseDouble(Main.clipEdit.startSec.getText())),Duration.seconds(Double.parseDouble(Main.clipEdit.endSec.getText())));
+			Main.imodel.selectedSound.get(0).setNameAndPath(Main.clipEdit.name.getText(), Main.clipEdit.path.getText(),
+					Duration.seconds(Double.parseDouble(Main.clipEdit.startSec.getText())),
+					Duration.seconds(Double.parseDouble(Main.clipEdit.endSec.getText())));
 		}
 	}
-	
+
 	private void createNewClip() {
 		Clip newClip = new Clip(Main.clipEdit.name.getText(), Main.clipEdit.path.getText());
 		newClip.setStartTime(Duration.seconds(Double.parseDouble(Main.clipEdit.startSec.getText())));
 		newClip.setStopTime(Duration.seconds(Double.parseDouble(Main.clipEdit.endSec.getText())));
-		
-		Main.m.catList.getSelectionModel().getSelectedItem().getSoundsProperty()
-				.set(Main.m.catList.getSelectionModel().getSelectedItem().getSoundsProperty()
-						.indexOf(Main.imodel.selectedSound.get(0)), newClip);
+
+		Main.m.catList.getSelectionModel().getSelectedItem().getSoundsProperty().set(Main.m.catList.getSelectionModel()
+				.getSelectedItem().getSoundsProperty().indexOf(Main.imodel.selectedSound.get(0)), newClip);
 		Main.imodel.selectedSound.set(0, newClip);
 
 		Main.control.updateButtons();
