@@ -26,7 +26,7 @@ import javafx.util.StringConverter;
  * The main view which will contain the list of category and sfx buttons
  */
 public class MainView extends BorderPane {
-	public Button s0, s1, s2, s3, playPause, createCat,soundEditButton,mixEditButton,playlistEditButton,clipEditButton;
+	public Button s0, s1, s2, s3, playPause, createCat,soundEditButton,mixEditButton,playlistEditButton,clipEditButton,deleteCat;
 	public ListView<Category> catList;
 
 	public MainView() {
@@ -84,6 +84,7 @@ public class MainView extends BorderPane {
 		clipEditButton = new Button("Edit Clip");
 		clipEditButton.setStyle(Clip.style);
 		createCat = new Button("Create Category");
+		deleteCat= new Button("DeleteCat");
 
 		// button icon found from: <div>Icons made by <a
 		// href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
@@ -97,7 +98,7 @@ public class MainView extends BorderPane {
 
 		// hb1.setPadding(10.0);
 
-		hb1.getChildren().addAll(soundEditButton, mixEditButton,playlistEditButton,clipEditButton, createCat);
+		hb1.getChildren().addAll(soundEditButton, mixEditButton,playlistEditButton,clipEditButton, createCat,deleteCat);
 
 		HBox hb2 = new HBox();
 		hb2.getChildren().addAll(playPause);

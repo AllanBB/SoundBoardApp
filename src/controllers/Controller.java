@@ -15,6 +15,9 @@ import domainObjects.Sound;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 
 /**
  * The Applications controller
@@ -35,12 +38,20 @@ public class Controller {
 		Main.m.mixEditButton.setOnAction(e -> {
 			Main.root.setCenter(Main.mixEdit);
 		});
-
+		Main.m.deleteCat.setOnAction(e->{
+			if(Main.mod.getCategoriesProperty().size()>1) {
+			Category toDelete=Main.m.catList.getSelectionModel().getSelectedItem();
+			if(Main.m.catList.getItems().indexOf(toDelete)==0){
+				Main.m.catList.getSelectionModel().select(1);
+			}else {
+				Main.m.catList.getSelectionModel().select(Main.m.catList.getItems().indexOf(toDelete)-1);
+			}
+			Main.mod.getCategoriesProperty().remove(toDelete);
+			}
+		});
 		Main.m.catList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Category>() {
 			@Override
 			public void changed(ObservableValue<? extends Category> ov, Category oldVal, Category newVal) {
-				Category temp = newVal;
-				ObservableList<Sound> temp2 = Main.imodel.buttonSounds;
 				Main.imodel.buttonSounds.set(0, newVal.getSound().get(0));
 				Main.imodel.buttonSounds.set(1, newVal.getSound().get(1));
 				Main.imodel.buttonSounds.set(2, newVal.getSound().get(2));
@@ -114,6 +125,45 @@ public class Controller {
 			clearSelected();
 			Main.m.s3.getStyleClass().add("Selected");
 		});
+		Main.save= new MenuItem("Save");
+		Main.save.setOnAction(e->{
+			save();
+		});
+		Main.editSoundMenuItem = new MenuItem("Edit Sound");
+		Main.editSoundMenuItem.setOnAction(e->{
+			Main.root.setCenter(Main.soundEdit);
+		});
+		 Main.editMixMenuItem = new MenuItem("Edit Mix");
+		Main.editMixMenuItem.setOnAction(e->{
+			Main.root.setCenter(Main.mixEdit);
+		});
+		 Main.editPlaylistMenuItem = new MenuItem("Edit Playlist");
+		Main.editPlaylistMenuItem.setOnAction(e->{
+			Main.root.setCenter(Main.playlistEdit);
+		});
+		 Main.editClipMenuItem = new MenuItem("Edit Clip");
+		Main.editClipMenuItem.setOnAction(e->{
+			Main.root.setCenter(Main.clipEdit);
+		});
+		
+		//Creating a sub-menu to hold about and help information.
+		 Main.subHelp = new MenuItem("Help");
+		Main.subHelp.setOnAction(e->{
+			try {
+				Main.root.setCenter(FXMLLoader.<VBox>load(getClass().getResource("/application/Views/Help.fxml")));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
+		Main.subAbout = new MenuItem("About");
+		Main.subAbout.setOnAction(e->{
+			try {
+				Main.root.setCenter(FXMLLoader.<VBox>load(getClass().getResource("/application/Views/About.fxml")));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
+		
 	}
 
 	public void clearSelected() {

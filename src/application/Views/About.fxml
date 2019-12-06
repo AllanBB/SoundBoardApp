@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <VBox spacing="5" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.AboutController">
+	fx:controller="controllers.AboutController">
 	<!-- TODO Add Nodes -->
 	<Label text="Sound Board App" style="-fx-font-weight: bold" />
 
@@ -22,7 +22,7 @@
 		<ImageView fx:id="imageView" layoutX="29.0" layoutY="44.0"
 			fitHeight="112.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@logo.png" />
+				<Image url="@/application/Views/logo.png" />
 			</image>
 		</ImageView>
 	</VBox>
