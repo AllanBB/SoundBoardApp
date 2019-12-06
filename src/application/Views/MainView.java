@@ -1,5 +1,6 @@
 package application.Views;
 
+import application.CustomWidget;
 import application.Main;
 import domainObjects.Category;
 import domainObjects.Clip;
@@ -80,7 +81,7 @@ public class MainView extends BorderPane {
 		clipEditButton = new Button("Edit Clip");
 		clipEditButton.setStyle(Clip.style);
 		createCat = new Button("Create Category");
-		deleteCat= new Button("DeleteCat");
+		deleteCat= new Button("Delete Category");
 
 		// button icon found from: <div>Icons made by <a
 		// href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
@@ -130,7 +131,7 @@ public class MainView extends BorderPane {
 		Separator sep = new Separator();
 		vb.getChildren().addAll(hb1, hb2, sep, buttonVBox);
 		this.setRight(vb);
-		
+		this.setBottom(new CustomWidget());
 		Main.imodel.buttonSounds.addListener(new ListChangeListener<Sound>() {
 			
 			@Override
