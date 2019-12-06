@@ -22,6 +22,7 @@ public class SoundEditController {
 				createNewSound();
 			}
 			Main.root.setCenter(Main.m);
+			Main.control.save();
 		});
 		Main.soundEdit.cancel.setOnAction(e -> {
 			Main.root.setCenter(Main.m);

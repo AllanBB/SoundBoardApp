@@ -20,6 +20,7 @@ public class ClipEditController {
 				createNewClip();
 			}
 			Main.root.setCenter(Main.m);
+			Main.control.save();
 		});
 		Main.clipEdit.cancel.setOnAction(e -> {
 			Main.root.setCenter(Main.m);
