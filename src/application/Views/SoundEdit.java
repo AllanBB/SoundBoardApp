@@ -23,8 +23,6 @@ public class SoundEdit extends Pane {
 	public SoundEdit() {
 		name = new TextField();
 		path =new Label("Select a sound ->");
-		path.setPrefWidth(200);
-		path.setMaxWidth(200);
 		save =new Button("Save");
 		cancel =new Button("Cancel");
 		openSoundPicker =new Button("Pick");//TODO replace with icon
@@ -42,13 +40,17 @@ public class SoundEdit extends Pane {
 	}
 
 	private void initiallizeElements() {
+		if(Main.imodel.selectedSound.get(0).getClass().equals(Sound.class)) {
 		if(Main.imodel.selectedSound.get(0).getPath()==null) {
 			path.setText("Select a sound ->");
 		}else {
 			path.setText(Main.imodel.selectedSound.get(0).getPath());
 		}
 		name.setText(Main.imodel.selectedSound.get(0).getName());
-		
+		}else {
+			name.setText("New Sound");
+			path.setText("Select a sound ->");
+		}
 		
 	}
 

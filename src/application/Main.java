@@ -1,22 +1,32 @@
 package application;
 
 import java.io.IOException;
-import javafx.util.Duration;
 
+import application.Views.ClipEdit;
 import application.Views.MainView;
+import application.Views.MixEdit;
+import application.Views.PlaylistEdit;
 import application.Views.SoundEdit;
+import controllers.ClipEditController;
+import controllers.Controller;
+import controllers.MixEditController;
+import controllers.PlaylistEditController;
+import controllers.SoundEditController;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -30,91 +40,99 @@ public class Main extends Application {
 	public static Media media= null;
 	public static MediaPlayer mediaPlayer;
 	public static int buttonRadius = 20;
-	public static Model mod = new Model(buttonRadius);
+	public static Model mod = new Model();
 	public static IModel imodel = new IModel();
 	public static final MainView m = new MainView();
+	public static MenuItem save,exit,editSoundMenuItem,editMixMenuItem,editPlaylistMenuItem,editClipMenuItem,subHelp,subAbout;
 	public static Controller control = new Controller();
 	public static SoundEdit soundEdit = new SoundEdit();
-	//public static SoundEditController soundEditController = new SoundEditController();
+	public static SoundEditController soundEditController = new SoundEditController();
+	public static PlaylistEdit playlistEdit = new PlaylistEdit();
+	public static PlaylistEditController playlistEdiController = new PlaylistEditController();
+	public static MixEdit mixEdit = new MixEdit();
+	public static MixEditController mixEditController = new MixEditController();
+	public static ClipEdit clipEdit = new ClipEdit();
+	public static ClipEditController clipEditController = new ClipEditController();
 	public static BorderPane root;
-	public static StackPane pane;
+	public static StackPane splashPane;
+	MenuBar menu;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			root = new BorderPane();
-			//Create MenuBar
+			//Create menubar
 			
-			MenuBar menu = new MenuBar();
-			
+			menu = new MenuBar();
+			Menu file = new Menu("File");
+			Menu edit = new Menu("Edit");
 			Menu help = new Menu("Help");
-
-			//Creating a sub-menu to hold about and help information.
-			Menu subHelp = new Menu("Help");
-			MenuItem helpDets = new MenuItem("This information will help you use my app, you're welcome.");
-			subHelp.getItems().add(helpDets);
 			
-			Menu subAbout = new Menu("About");
-			MenuItem logo = new MenuItem("Developers: \nPatrick Godin,\nBrianne Savard,\nAllan Beaton Boutilier");
-			Image l = new Image(getClass().getResourceAsStream("./logo.png"));
-			logo.setGraphic(new ImageView(l));
-			subAbout.getItems().addAll(logo);
+			 exit = new MenuItem("Exit");
+			exit.setOnAction(e->{
+				primaryStage.close();
+			});
 			
+			
+			file.getItems().addAll(save,exit);
+			edit.getItems().addAll(editSoundMenuItem,editMixMenuItem,editPlaylistMenuItem,editClipMenuItem);
 			help.getItems().addAll(subHelp, subAbout);
-			menu.getMenus().add(help); 
+			menu.getMenus().addAll(file,edit,help);
 			
 			displaySplash();
-			root.setTop(menu);
-			root.setCenter(m);
+			
+			control.load();
 
-			Scene scene = new Scene(root);
+			Scene scene = new Scene(root,850,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Sound Board Project");
+			Image l = new Image(getClass().getResourceAsStream("./logo.png"));
+			primaryStage.getIcons().add(l);
 			primaryStage.sizeToScene();
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void displaySplash() {
-		try {
-			//Load Splash view
-			pane = FXMLLoader.load(getClass().getResource("splash.fxml"));
-			
-			//Add to the root container
-			//root.getChildren().add(pane);
-			
-			//Load splash screen with face in effect
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3),pane);
-			fadeIn.setFromValue(0);
-			fadeIn.setToValue(1);
-			fadeIn.setCycleCount(1);
-			
-			//End splash animation
-			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3),pane);
-			fadeOut.setFromValue(1);
-			fadeOut.setToValue(0);
-			fadeOut.setCycleCount(1);
-			
-			fadeIn.play();
-			root.setCenter(pane);
-			
-			//After fade begins
-			
-			fadeIn.setOnFinished((e) -> {
-				fadeOut.play();
-			});
-			
-			//After fade out
-			fadeOut.setOnFinished((e) -> {
-				root.setCenter(m);
-			});
-		}catch(IOException ex){
-			
-		}
-	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	private void displaySplash() {
+		 StackPane pane= new StackPane();
+		try {
+			 pane = FXMLLoader.<StackPane>load(getClass().getResource(("/application/Views/splash.fxml")));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+         root.setCenter(pane);;
+//         root.setCenter(pane);
+         
+         FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), pane);
+         fadeIn.setFromValue(0);
+         fadeIn.setToValue(1);
+         fadeIn.setCycleCount(1);
+
+         FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), pane);
+         fadeOut.setFromValue(1);
+         fadeOut.setToValue(0);
+         fadeOut.setCycleCount(1);
+
+         fadeIn.play();
+
+         fadeIn.setOnFinished((e) -> {
+             fadeOut.play();
+         });
+
+         fadeOut.setOnFinished((e) -> {
+        	 root.setTop(menu);
+             root.setCenter(m);
+         });
+
+     
+	}
+	
 }

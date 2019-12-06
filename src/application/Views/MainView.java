@@ -2,11 +2,16 @@ package application.Views;
 
 import application.Main;
 import domainObjects.Category;
+import domainObjects.Clip;
+import domainObjects.Mix;
+import domainObjects.Playlist;
 import domainObjects.Sound;
 import javafx.collections.ListChangeListener;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
+import javafx.scene.control.Skin;
+import javafx.scene.control.SkinBase;
 import javafx.scene.control.Slider;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.Image;
@@ -14,13 +19,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.util.StringConverter;
 
 /**
  * The main view which will contain the list of category and sfx buttons
  */
 public class MainView extends BorderPane {
-	public Button s0, s1, s2, s3, playPause, createCat,edit;
+	public Button s0, s1, s2, s3, playPause, createCat,soundEditButton,mixEditButton,playlistEditButton,clipEditButton,deleteCat;
 	public ListView<Category> catList;
 
 	public MainView() {
@@ -69,10 +75,16 @@ public class MainView extends BorderPane {
 		// Hbox for edit/create/mix buttons
 		HBox hb1 = new HBox();
 
-		edit = new Button("Edit");
-		Button mix = new Button("Mix");
+		soundEditButton = new Button("Edit Sound");
+		soundEditButton.setStyle(Sound.style);
+		mixEditButton = new Button("Edit Mix");
+		mixEditButton.setStyle(Mix.style);
+		playlistEditButton = new Button("Edit Playlist");
+		playlistEditButton.setStyle(Playlist.style);
+		clipEditButton = new Button("Edit Clip");
+		clipEditButton.setStyle(Clip.style);
 		createCat = new Button("Create Category");
-		Slider slider = new Slider();
+		deleteCat= new Button("DeleteCat");
 
 		// button icon found from: <div>Icons made by <a
 		// href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
@@ -86,10 +98,10 @@ public class MainView extends BorderPane {
 
 		// hb1.setPadding(10.0);
 
-		hb1.getChildren().addAll(edit, mix, createCat);
+		hb1.getChildren().addAll(soundEditButton, mixEditButton,playlistEditButton,clipEditButton, createCat,deleteCat);
 
 		HBox hb2 = new HBox();
-		hb2.getChildren().addAll(slider, playPause);
+		hb2.getChildren().addAll(playPause);
 
 		// BorderPane.setAlignment(hb1, Pos.TOP_RIGHT);
 
@@ -101,7 +113,12 @@ public class MainView extends BorderPane {
 		s1 = new Button(Main.mod.getCategories().get(0).getSound().get(1).getName());
 		s2 = new Button(Main.mod.getCategories().get(0).getSound().get(2).getName());
 		s3 = new Button(Main.mod.getCategories().get(0).getSound().get(3).getName());
-
+		
+		s0.setStyle(Main.mod.getCategories().get(0).getSound().get(0).getStyle());
+		s1.setStyle(Main.mod.getCategories().get(0).getSound().get(1).getStyle());
+		s2.setStyle(Main.mod.getCategories().get(0).getSound().get(2).getStyle());
+		s3.setStyle(Main.mod.getCategories().get(0).getSound().get(3).getStyle());
+		
 		buttonVBox.setSpacing(30.0);
 		hb3.setSpacing(30.0);
 		hb4.setSpacing(30.0);
@@ -126,10 +143,23 @@ public class MainView extends BorderPane {
 				s1.setText(Main.imodel.buttonSounds.get(1).getName());
 				s2.setText(Main.imodel.buttonSounds.get(2).getName());
 				s3.setText(Main.imodel.buttonSounds.get(3).getName());
+				
+				s0.setStyle(Main.imodel.buttonSounds.get(0).getStyle());
+				s1.setStyle(Main.imodel.buttonSounds.get(1).getStyle());
+				s2.setStyle(Main.imodel.buttonSounds.get(2).getStyle());
+				s3.setStyle(Main.imodel.buttonSounds.get(3).getStyle());
+				
 			}
 			
 		});
-
+		s0.getStyleClass().add("CustomButton");
+		s1.getStyleClass().add("CustomButton");
+		s2.getStyleClass().add("CustomButton");
+		s3.getStyleClass().add("CustomButton");
+		soundEditButton.getStyleClass().add("CustomButton");
+		playlistEditButton.getStyleClass().add("CustomButton");
+		mixEditButton.getStyleClass().add("CustomButton");
+		clipEditButton.getStyleClass().add("CustomButton");
 	}
 
 	// list of categories
