@@ -26,16 +26,15 @@ public class Model implements Serializable {
 
 		
 		Category cat1 = new Category("Animals");
-		Sound x = new Sound("Bird", "src/SampleSounds/birds2.wav");
+		Sound x = new Sound("Bird", "soundFile/birds2.wav");
 		categories.add(cat1);
 		cat1.addSound(x);
-		cat1.addSound(new Sound("Raven","src/SampleSounds/raven2.wav"));
+		cat1.addSound(new Sound("Raven","soundFile/raven2.wav"));
 		
 		Category cat2= new Category("Animals 2");
 		categories.add(cat2);
-		cat2.addSound(new Sound("Horse","src/SampleSounds/horse.wav"));
-		cat2.addSound(new Sound("Sea Gull","src/SampleSounds/seagull2.wav"));
-		
+		cat2.addSound(new Sound("Horse","soundFile/horse.wav"));
+		cat2.addSound(new Sound("Sea Gull","soundFile/seagull2.wav"));
 	}
 
 	public SimpleListProperty<Category> getCategoriesProperty(){
@@ -43,11 +42,6 @@ public class Model implements Serializable {
 	}
 	
 	public ObservableList<Category> getCategories(){
-//		ArrayList<String> list = new ArrayList<String>();
-//		for(Category cat:categories) {
-//			list.add(cat.getName());
-//		}
-		
 		return categories.getValue();
 	}
 	
@@ -56,25 +50,6 @@ public class Model implements Serializable {
 		return list;
 	}
 	public void setCategoriesForSeriliazation(ArrayList<Category> arg) {
-//		Category cat=new Category("test");
-//		cat.getSound().setAll(arg);
-//		categories.clear();
 		categories.setAll(arg);
 	}
-	
-	
-	//TODO Add getters setters and all that stuff
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

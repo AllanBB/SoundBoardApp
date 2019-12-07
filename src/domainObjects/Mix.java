@@ -2,8 +2,6 @@ package domainObjects;
 
 import java.io.Serializable;
 
-import javafx.util.Duration;
-
 /**
  * A mixture of 2 sound Allows for 2 sounds to be played at the same time.
  */
@@ -23,6 +21,7 @@ public class Mix extends Sound implements Serializable {
 		this.sound2 =new Sound("filler",path2);
 	}
 
+	@Override
 	public void play() {
 
 		sound1.play();
@@ -31,6 +30,7 @@ public class Mix extends Sound implements Serializable {
 
 	}
 	
+	@Override
 	public  String getStyle() {
 		return style;
 	}

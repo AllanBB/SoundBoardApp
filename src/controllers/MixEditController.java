@@ -4,7 +4,6 @@ import java.io.File;
 
 import application.Main;
 import domainObjects.Mix;
-import domainObjects.Playlist;
 import javafx.stage.FileChooser;
 
 public class MixEditController {
@@ -12,11 +11,7 @@ public class MixEditController {
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Music files", "*.mp3", "*.wav"));
 		Main.mixEdit.save.setOnAction(e -> {
-			if (Main.imodel.selectedSound.get(0).getClass().equals(Playlist.class)) {
-				updateExistingMix();
-			} else {
 				createNewMix();
-			}
 			Main.root.setCenter(Main.m);
 			Main.control.save();
 
@@ -58,13 +53,14 @@ public class MixEditController {
 		Main.control.updateButtons();
 	}
 
-	/**
-	 * 
-	 */
-	private void updateExistingMix() {
-		if (!Main.mixEdit.path1.getText().equals("Select a sound ->")) {
-			Main.imodel.selectedSound.get(0).setNameAndPath(Main.mixEdit.name.getText(),
-					Main.mixEdit.path1.getText(), Main.mixEdit.path2.getText());
-		}
-	}
+//	/**
+//	 * 
+//	 */
+//	private void updateExistingMix() {
+//		System.out.println("test");
+//		if (!Main.mixEdit.path1.getText().equals("Select a sound ->")) {
+//			Main.imodel.selectedSound.get(0).setNameAndPath(Main.mixEdit.name.getText(),
+//					Main.mixEdit.path1.getText(), Main.mixEdit.path2.getText());
+//		}
+//	}
 }

@@ -4,7 +4,6 @@ import java.io.File;
 
 import application.Main;
 import domainObjects.Clip;
-import domainObjects.Sound;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 

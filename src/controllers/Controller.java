@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,12 +10,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import application.Main;
-import application.Model;
 import domainObjects.Category;
 import domainObjects.Sound;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
@@ -191,7 +190,7 @@ public class Controller {
 
 	public void save() {
 		try {
-			FileOutputStream fileOutputStream = new FileOutputStream("src/model.txt");
+			FileOutputStream fileOutputStream = new FileOutputStream(System.getProperty("user.home") + "/SoundBoard/model.txt");
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 			objectOutputStream.writeObject(Main.mod.getCategoriesForSeriliazation());
 			for (Category cat : Main.mod.getCategories()) {
@@ -204,14 +203,15 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void load() {
 		try {
-			FileInputStream fileInputStream = new FileInputStream("src/model.txt");
+			File file=new File(System.getProperty("user.home") + "/SoundBoard/model.txt");
+			if(!file.getParentFile().exists())file.getParentFile().mkdir();
+			file.createNewFile();
+			FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.home") + "/SoundBoard/model.txt");
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 			ArrayList<Category> list = new ArrayList<Category>();
-			// while(objectInputStream.available()>0) {
-			// list.add((Category) objectInputStream.readObject());
-			// }
 			list = (ArrayList<Category>) objectInputStream.readObject();
 			for (Category cat : list) {
 				if (cat.getSound().size() < 4) {

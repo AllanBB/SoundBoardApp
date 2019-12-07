@@ -1,12 +1,9 @@
 package domainObjects;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -50,7 +47,16 @@ public class Sound implements Serializable {
 		this.path = new SimpleStringProperty();
 		this.name.setValue(name);
 		this.path.setValue(path);
+		if(path.contains("soundFile")) {
+			try {
+				media = new Media(	this.getClass().getResource(path).toURI().toString());
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
 		media = new Media(new File(path).toURI().toString());
+		}
 		mediaPlayer = new MediaPlayer(media);
 	}
 
@@ -68,15 +74,34 @@ public class Sound implements Serializable {
 	}
 
 	public void setPath(String path) {
+	
 		this.path.setValue(path);
+		if(path.contains("soundFile")) {
+			try {
+				media = new Media(	this.getClass().getResource(path).toURI().toString());
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
 		media = new Media(new File(path).toURI().toString());
+		}
 		mediaPlayer = new MediaPlayer(media);
 	}
 
 	public void setNameAndPath(String name, String path) {
 		this.name.setValue(name);
 		this.path.setValue(path);
+		if(path.contains("soundFile")) {
+			try {
+				media = new Media(	this.getClass().getResource(path).toURI().toString());
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
 		media = new Media(new File(path).toURI().toString());
+		}
 		mediaPlayer = new MediaPlayer(media);
 	}
 	

@@ -1,5 +1,6 @@
 package application.Views;
 
+import application.CustomWidget;
 import application.Main;
 import domainObjects.Category;
 import domainObjects.Clip;
@@ -10,16 +11,12 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
-import javafx.scene.control.Skin;
-import javafx.scene.control.SkinBase;
-import javafx.scene.control.Slider;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.util.StringConverter;
 
 /**
@@ -32,8 +29,13 @@ public class MainView extends BorderPane {
 	public MainView() {
 
 		// Create Listview of Categories
-
+		VBox rightBox =new VBox();
 		catList = new ListView<Category>();
+		createCat = new Button("Create Category");
+		deleteCat= new Button("Delete Category");
+		HBox catButton = new HBox(createCat,deleteCat);
+		catButton.setSpacing(5);
+		rightBox.getChildren().addAll(catList,catButton);
 		catList.setEditable(true);
 		catList.setCellFactory(param -> {
 			TextFieldListCell<Category> cell = new TextFieldListCell<Category>() {
@@ -69,7 +71,7 @@ public class MainView extends BorderPane {
 			}
 		});
 		catList.setItems(Main.mod.getCategories());
-		this.setLeft(catList);
+		this.setLeft(rightBox);
 		catList.getSelectionModel().select(0);
 
 		// Hbox for edit/create/mix buttons
@@ -83,25 +85,27 @@ public class MainView extends BorderPane {
 		playlistEditButton.setStyle(Playlist.style);
 		clipEditButton = new Button("Edit Clip");
 		clipEditButton.setStyle(Clip.style);
-		createCat = new Button("Create Category");
-		deleteCat= new Button("DeleteCat");
+		
 
 		// button icon found from: <div>Icons made by <a
 		// href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
 		// from <a href="https://www.flaticon.com/"
 		// title="Flaticon">www.flaticon.com</a></div>
-		Image play = new Image(getClass().getResourceAsStream("./play.png"));
+		Image play = new Image(getClass().getResourceAsStream("play.png"));
 		playPause = new Button();
 		playPause.setGraphic(new ImageView(play));
 
-		hb1.setSpacing(30.0);
+		hb1.setSpacing(5.0);
 
 		// hb1.setPadding(10.0);
-
-		hb1.getChildren().addAll(soundEditButton, mixEditButton,playlistEditButton,clipEditButton, createCat,deleteCat);
+		VBox vb1=new VBox(soundEditButton, mixEditButton);
+		vb1.setSpacing(5);
+		VBox vb2=new VBox(playlistEditButton,clipEditButton );
+		vb2.setSpacing(5);
+		hb1.getChildren().addAll(vb1,vb2,playPause);
 
 		HBox hb2 = new HBox();
-		hb2.getChildren().addAll(playPause);
+		hb2.getChildren().addAll();
 
 		// BorderPane.setAlignment(hb1, Pos.TOP_RIGHT);
 
@@ -133,8 +137,8 @@ public class MainView extends BorderPane {
 		VBox vb = new VBox(8);
 		Separator sep = new Separator();
 		vb.getChildren().addAll(hb1, hb2, sep, buttonVBox);
-		this.setRight(vb);
-		
+		this.setCenter(vb);
+		this.setBottom(new CustomWidget());
 		Main.imodel.buttonSounds.addListener(new ListChangeListener<Sound>() {
 			
 			@Override
